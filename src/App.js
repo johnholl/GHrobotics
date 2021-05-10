@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {Row, Col, InputNumber, Button, Input} from 'antd';
 import './App.css';
-import Plot from 'react-plotly.js';
+// import Plot from 'react-plotly.js';
+import Plotly from "plotly.js-basic-dist";
+import createPlotlyComponent from "react-plotly.js/factory";
 import {generatePath, calculateOffsetPaths} from './utils';
 import 'antd/dist/antd.css';
 
 
-
+const Plot = createPlotlyComponent(Plotly);
 
 function App() {
   const [x, setX] = useState([]);
@@ -17,6 +19,7 @@ function App() {
   const [yRight, setRightY] = useState([]);
 
   const [inputs, setInputs] = useState([{t:0, x:0, y:0, xp:0, yp:1, dt:0.1}, {t:1, x:1, y:1, xp:0, yp:1, dt:0.1}])
+  const [diam, setDiam] = useState(0.1);
 
   const onChange = (label, val, idx) => {
     var newinputs = JSON.parse(JSON.stringify(inputs));
@@ -34,7 +37,7 @@ function App() {
     var dtway = inputs.map(a=>{return(a.dt)})
     console.log(xway, yway, xpway, ypway, tway, dtway);
     const {xpath, ypath} = generatePath(xway, yway, xpway, ypway, tway, dtway);
-    const {xLpath, yLpath, xRpath, yRpath} = calculateOffsetPaths(xpath, ypath, 0.5);
+    const {xLpath, yLpath, xRpath, yRpath} = calculateOffsetPaths(xpath, ypath, diam);
   
     setX(xpath);
     setY(ypath);
@@ -62,6 +65,8 @@ function App() {
     <div>
       <Row style={{padding:20}} gutter={[16,16]}>
       <Col span={12}>
+      <Row justify="start" style={{paddingLeft:30}}>diameter</Row>
+      <Row justify="start" style={{paddingLeft:30, paddingBottom:20}}><InputNumber stringmode label={"d"} min={0} max={10} defaultValue={diam} placeholder={"diam"} onChange={(val) => {setDiam(val)}} /></Row>
         {inputs.map((value, i) => {
           return(
             <Row style={{padding:20}} align="middle" justify="space-around" key={i}>
@@ -97,7 +102,7 @@ function App() {
         })}
         <Row justify="space-around">
         <Button type="primary" onClick={addPoint}>Add Point</Button>
-        <Button onClick={calculate}>Calculate Path</Button>
+        <Button type="primary" style={{backgroundColor:"green", borderColor:"green"}} onClick={calculate}>Calculate Path</Button>
         </Row>
         </Col>
         <Col span={12}>
