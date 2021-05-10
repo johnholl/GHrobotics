@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Row, Col, InputNumber, Button, Input} from 'antd';
+import {Row, Col, InputNumber, Button} from 'antd';
 import './App.css';
 // import Plot from 'react-plotly.js';
 import Plotly from "plotly.js-basic-dist";
@@ -130,7 +130,19 @@ function App() {
             marker: {color: 'green'},
           },
            ]}
-        layout={ {width: 500, height: 500, title: 'Robot path', xaxis: {range: [-10,10]}, yaxis: {range: [-10, 10]}}}
+        layout={ {width: 500, height: 500, title: 'Robot path', xaxis: {range: [-10,10]}, yaxis: {range: [-10, 10]},
+                images: [{
+                  source: "/fielddrawing.png",
+                  x:0,
+                  sizex:10,
+                  y:5,
+                  sizey:5,
+                  xref:"x",
+                  yref:"y",
+                  opacity:1.0,
+                  layer:"below",
+                  sizing:"stretch",
+              }]}}
         config = {{scrollZoom:true}}
       />
         </Col>
