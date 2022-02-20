@@ -63,10 +63,9 @@ function App() {
 
   return (
     <div>
-      <Row style={{padding:20}} gutter={[16,16]}>
-      <Col span={12}>
-      <Row justify="start" style={{paddingLeft:30}}>diameter</Row>
-      <Row justify="start" style={{paddingLeft:30, paddingBottom:20}}><InputNumber stringmode label={"d"} min={0} max={10} defaultValue={diam} placeholder={"diam"} onChange={(val) => {setDiam(val)}} /></Row>
+      <Row style={{padding:20, paddingTop:100, minHeight:800}} gutter={[16,16]} justify="space-around">
+      <Col span={8}>
+        <h2>Set Path Details</h2>
         {inputs.map((value, i) => {
           return(
             <Row style={{padding:20}} align="middle" justify="space-around" key={i}>
@@ -106,6 +105,15 @@ function App() {
         </Row>
         </Col>
         <Col span={12}>
+          <h2>Set Robot Details</h2>
+          <Row justify="start" style={{paddingLeft:30, paddingBottom:20}}>
+            Track width (ft) <InputNumber addonBefore="+" stringmode min={0} max={10} defaultValue={diam} onChange={(val) => {setDiam(val)}} />
+            </Row>
+        </Col>
+        </Row>
+        <Row>
+        <Col span={24}>
+          <Row justify="center" style={{paddingTop:20}}>
         <Plot 
         data={[
           {
@@ -130,13 +138,13 @@ function App() {
             marker: {color: 'green'},
           },
            ]}
-        layout={ {width: 500, height: 500, title: 'Robot path', xaxis: {range: [-10,10]}, yaxis: {range: [-10, 10]},
+        layout={ {width: 1200, height: 1200, title: 'Robot path', xaxis: {range: [-40,40]}, yaxis: {range: [-40, 40]}, dragmode: "pan",
                 images: [{
-                  source: "/fielddrawing.png",
-                  x:0,
-                  sizex:10,
-                  y:5,
-                  sizey:5,
+                  source: "/frc2022_field.png",
+                  x:-39.825,
+                  sizex:78.85,
+                  y:19.45,
+                  sizey:40.3,
                   xref:"x",
                   yref:"y",
                   opacity:1.0,
@@ -145,8 +153,9 @@ function App() {
               }]}}
         config = {{scrollZoom:true}}
       />
-        </Col>
       </Row>
+        </Col>
+        </Row>
 
     </div>
   );

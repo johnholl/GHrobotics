@@ -1,0 +1,7 @@
+155, 237 --> 155, 777     difference of 540px is 162 inches vertically, or 3.33 px per inch
+513, 1380 --> 1595, 1380  difference of 1082px is 324 inches horizontally, or 3.34 px per inch
+
+
+total dim
+3154x1612px   -->   946.2x483.6in --> 78.85x40.3
+
