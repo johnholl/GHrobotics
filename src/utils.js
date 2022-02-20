@@ -77,3 +77,20 @@ export function calculateOffsetPaths(x, y, d){
 
     return {xLpath, yLpath, xRpath, yRpath};
 }
+
+
+export function xyrange(xstart, xend, ystart, yend, inc) {
+    var xres = [];
+    var yres = []
+    var y = ystart;
+    while(y < yend){
+        var x = xstart
+        while(x < xend){
+            xres.push(x);
+            yres.push(y);
+            x += inc;
+        }
+        y += inc;
+    }
+    return [xres, yres];
+}
